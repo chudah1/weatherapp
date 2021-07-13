@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>Weather</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href=" https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href=" https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+</head>
+<body>
+<div class="container-fluid px-1 px-sm-3 py-5 mx-auto">
+    <div class="row d-flex justify-content-center">
+        <div class="card1 col-lg-8 col-md-7"> <p class="lead"><strong>What is the Weather like?</strong></p>
+            <div class="text-center"> <img class="image mt-5" src="https://i.imgur.com/M8VyA2h.png"> </div>
+            <div class="row px-3 mt-3 mb-3">
+                <h3 class="large-font mr-3">{{temp}}</h3>
+
+                <div class="d-flex flex-column text-center">
+                   <img src="http://openweathermap.org/img/w/{{icon}}.png" style="width:70px"> <h5>{{description}}</h5>
+                </div>
+            </div>
+        </div>
+        <div class="card2 col-lg-4 col-md-5">
+
+                <form method="POST">
+                    {% csrf_token %}
+
+                        <div class="row px-3"> <input type="text" name="city" placeholder="Search by City" class="mb-5">
+                            <div class="input-group-btn">
+                        <button type="submit" class="btn btn-primary mt-4 ml-2">Search</button>
+                    </div>
+
+                </form>
+            </div>
+                <div class="line my-5"></div>
+                <p>Weather Details</p>
+                <div class="row px-3">
+                    {% if country_code and coordinate and temp and pressure and humidity %}
+                    <p class="light-text">Country code:</p>
+                    <p class="ml-auto">{{country_code}}</p>
+                </div>
+                <div class="row px-3">
+                    <p class="light-text">Coordinates [X,Y]</p>
+                    <p class="ml-auto">{{coordinate}}</p>
+                </div>
+                <div class="row px-3">
+                    <p class="light-text">Forecast</p>
+                    <p class="ml-auto">{{main}} <img src="http://openweathermap.org/img/w/{{icon}}.png" style="width:70px"></p>
+                </div>
+                <div class="row px-3">
+                    <p class="light-text">Temperature in Celsius</p>
+                    <p class="ml-auto">{{temp}}</p>
+                </div>
+                <div class="row px-3">
+                    <p class="light-text">Pressure</p>
+                    <p class="ml-auto">{{pressure}}</p>
+                </div>
+                <div class="row px-3">
+                    <p class="light-text">Description</p>
+                    <p class="ml-auto">{{description}}</p>
+                </div>
+                </div>
+</div>
+                {% endif %}
+                <div class="line mt-3">
+
+                </div>
+            </div>
+        </div>
+</body>
+</html>
